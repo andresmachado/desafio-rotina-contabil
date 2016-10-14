@@ -7,11 +7,11 @@ class Tarefa(models.Model):
 
 class Fluxograma(models.Model):
     titulo = models.CharField(max_length=128, default='')
-    tarefas = models.ManyToManyField('Tarefa', through='TarefaFluxograma')
+    tarefas = models.ManyToManyField(Tarefa, through='TarefaFluxograma')
 
 
 class TarefaFluxograma(models.Model):
-    tarefa = models.ForeignKey(TemplateTarefa)
+    tarefa = models.ForeignKey(Tarefa)
     fluxograma = models.ForeignKey(Fluxograma)
     numero = models.PositiveIntegerField()
 
