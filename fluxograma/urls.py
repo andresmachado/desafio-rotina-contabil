@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'^$', views.list_flux, name='list'),
     url(r'^create/$', views.create_flux, name='create'),
     url(r'^(?P<pk>[0-9]+)/$', views.detail_flux, name='detail'),
+    url(r'^(?P<pk>[0-9]+)/update/$', views.edit_flux, name='edit'),
 ]

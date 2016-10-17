@@ -17,7 +17,7 @@
             <tr>
                 <td><h4>{{ flux.titulo }}</h4></td>
                 <td>
-                    <a href=""><button class="btn btn-info" title="Editar fluxograma">
+                    <a href="{% url 'fluxogramas:edit' flux.id %} "><button class="btn btn-info" title="Editar fluxograma">
                         <i class="glyphicon glyphicon-pencil"></i>
                     </button></a>
                     <a href="{% url 'fluxogramas:detail' flux.id %} "><button class="btn btn-primary" title="Visualizar fluxograma">

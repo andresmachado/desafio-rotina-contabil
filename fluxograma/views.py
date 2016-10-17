@@ -18,3 +18,7 @@ def detail_flux(request, pk, template_name='fluxogramas/detail.html'):
     fluxograma = get_object_or_404(Fluxograma, pk=pk)
     tarefas = fluxograma.tarefafluxograma_set.all()
     return render(request, template_name, {"fluxograma": fluxograma, "tarefas": tarefas})
+
+
+def edit_flux(request, pk, template_name='fluxogramas/edit.html'):
+    return render(request, template_name, )
