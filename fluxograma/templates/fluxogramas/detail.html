@@ -1,0 +1,30 @@
+{% extends 'fluxogramas/base.html' %}
+
+{% block content %}
+    <section>
+        <h3>Detalhes do fluxograma: {{ fluxograma.titulo }} </h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Ordem</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for taf in tarefas %}
+                    <tr>
+                        <td>{{ taf.tarefa }}</td>
+                        <td>
+                            {{ taf.numero }}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <h4>Não há tarefas neste fluxograma.</h4>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'fluxogramas:list' %}"><button class="btn btn-primary">Editar</button></a>
+        <a href="{% url 'fluxogramas:list' %}"><button class="btn btn-danger">Voltar</button></a>
+    </section>
+{% endblock %}

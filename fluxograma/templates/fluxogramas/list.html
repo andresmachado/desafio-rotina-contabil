@@ -1,0 +1,35 @@
+{% extends 'fluxogramas/base.html' %}
+
+{% block content %}
+
+<section>
+    <h1>Seus fluxogramas</h1>
+    <a href="{% url 'fluxogramas:create' %}"><button class="btn btn-success">Adicionar Fluxograma</button></a>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flux in fluxogramas %}
+            <tr>
+                <td><h4>{{ flux.titulo }}</h4></td>
+                <td>
+                    <a href=""><button class="btn btn-info" title="Editar fluxograma">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </button></a>
+                    <a href="{% url 'fluxogramas:detail' flux.id %} "><button class="btn btn-primary" title="Visualizar fluxograma">
+                        <i class="glyphicon glyphicon-eye-open"></i>
+                    </button></a>
+                </td>
+            </tr>
+            {% empty %}
+            <h3>Não há fluxogramas criados ainda.</h3>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+{% endblock content %}
