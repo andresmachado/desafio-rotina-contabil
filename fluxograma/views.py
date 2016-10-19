@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404,redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
@@ -11,7 +11,23 @@ def list_flux(request, template_name="fluxogramas/list.html"):
     return render(request, template_name, {'fluxogramas': fluxogramas})
 
 
+@csrf_exempt
 def create_flux(request, template_name="fluxogramas/create.html"):
+    if request.method == "POST":
+        titulo = request.POST.get('titulo')
+        novo_fluxograma = Fluxograma.objects.create(titulo=titulo)
+        tarefas = request.POST.get('tarefas')
+
+        if tarefas:
+            tarefas = request.POST.get('tarefas', None).split("&")
+            for index, tarefa in enumerate(tarefas):
+                tarefa_titulo = tarefa.split('=')[1]
+                nova_tarefa = Tarefa.objects.create(titulo=tarefa_titulo)
+                novo_fluxtaf = TarefaFluxograma(fluxograma=novo_fluxograma, tarefa=nova_tarefa, numero=index)
+                novo_fluxtaf.save()
+            return redirect('fluxogramas:list')
+        else:
+            return redirect('fluxogramas:list')
     return render(request, template_name)
 
 

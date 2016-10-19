@@ -1,1 +1,48 @@
 {% extends 'fluxogramas/base.html' %}
+
+{% block extrahead %}
+<script type="text/javascript">
+    $(function(){
+            $("#tarefas").sortable({
+                items: "li.tarefa",
+                update: function(event, ui){
+                    $("#list_tarefas").val($("#tarefas").sortable('serialize'))
+                }
+            });
+            $("#tarefas").disableSelection();
+        });
+    function handlePress(e){
+            if(e.keyCode == 13){
+                e.preventDefault();
+                
+                tarefas = $("#tarefas")
+                novaTarefa = $("#adicionaTarefa").val()
+                id = "tarefa_" + novaTarefa
+
+                tarefas.append('<li class="tarefa ui-sortable-handle" id=' + id + '>'+ novaTarefa +'<i class="glyphicon glyphicon-move pull-right"></i></li>')
+
+                $("#adicionaTarefa").val('')
+                $("#tarefas").sortable("refresh")
+                $("#list_tarefas").val($("#tarefas").sortable('serialize'))
+            }
+        }
+</script>
+{% endblock extrahead%}
+
+{% block content %}
+<section>
+    <h4>Criar Fluxograma</h4>
+    <form action="{% url 'fluxogramas:create' %}" method="POST">
+        <input type="text" name="titulo" class="form-control" placeholder="Titulo do fluxograma" required>
+        <br>
+        <h4>Tarefas</h4>
+        <input type="text" id="adicionaTarefa" name="tarefa" class="form-control" placeholder="Adicionar Tarefa" onkeypress="handlePress(event)">
+        <br>
+        <ul id="tarefas">
+        </ul>
+        <input type="hidden" id="list_tarefas" name="tarefas">
+        <br>
+        <input type="submit" class="btn btn-success" value="Criar fluxograma">
+    </form>
+</section>
+{% endblock content %}

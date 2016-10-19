@@ -7,17 +7,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Titulo</th>
-                    <th>Número</th>
+                    <th>Tarefas</th>
                 </tr>
             </thead>
             <tbody>
                 {% for taf in tarefas %}
                     <tr>
                         <td>{{ taf.tarefa }}</td>
-                        <td>
-                            {{ taf.numero }}
-                        </td>
                     </tr>
                 {% empty %}
                     <h4>Não há tarefas neste fluxograma.</h4>
