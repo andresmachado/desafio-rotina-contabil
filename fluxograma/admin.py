@@ -12,7 +12,7 @@ admin.site.register(Tarefa, TarefaAdmin)
 
 class TarefasAdmin(admin.TabularInline):
     model = TarefaFluxograma
-    extra = 1
+    extra = 0
 
 
 class FluxogramaAdmin(admin.ModelAdmin):

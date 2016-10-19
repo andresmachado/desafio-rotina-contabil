@@ -1,0 +1,25 @@
+#tarefas i {
+    cursor: pointer;
+}
+
+#tarefas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#tarefas li {
+    margin-top: 0.5em;
+    width: 50%;
+    padding: 15px;
+    display: block;
+    border: 1px solid black;
+}
+
+input[name='titulo'], input[name='prioridade'] {
+    width: 50%;
+}
+
+input[name='prioridade'] {
+    margin-top: 10px;
+}

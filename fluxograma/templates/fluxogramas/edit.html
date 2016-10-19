@@ -1,5 +1,46 @@
 {% extends 'fluxogramas/base.html' %}
 
+{% block extrahead %}
+    <script type="text/javascript">
+        $(function(){
+            $("#tarefas").sortable({
+                items: "li.tarefa",
+                update: function(event, ui){
+                    var data = $("#tarefas").sortable('serialize');
+            $.ajax({
+                url: "{% url 'fluxogramas:edit' fluxograma.id %}",
+                type: "post",
+                data: data
+            });
+                },
+            });
+            $("#tarefas").disableSelection();
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
 
+<section>
+    <h3>Editar</h3>
+    <h4>Fluxograma: {{ fluxograma.titulo }}</h4>
+    <form action="{% url 'fluxogramas:edit' fluxograma.id %}" method="POST">
+        <input id="adicionaTarefa" type="text" name="titulo" class="form-control" placeholder="Adicionar tarefa" />
+        <input id="prioridadeTarefa" type="number" name="prioridade" class="form-control" placeholder="Proridade tarefa" />
+        <br>
+        <input type="submit" class="btn btn-success" value="Adicionar tarefa">
+    </form>
+    <h4>Tarefas</h4>
+    <ul id="tarefas">
+        {% for taf in tarefas %}
+            <li class="tarefa" id="tarefa_{{ taf.id }}">
+                {{ taf.tarefa }}<i class="glyphicon glyphicon-move pull-right"></i>
+            </li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="{% url 'fluxogramas:list' %}"><button class="btn btn-danger">Voltar</button></a>
+</section>
+
 {% endblock content %}
+

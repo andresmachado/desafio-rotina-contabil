@@ -8,7 +8,7 @@
             <thead>
                 <tr>
                     <th>Titulo</th>
-                    <th>Ordem</th>
+                    <th>Número</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,7 +24,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        <a href="{% url 'fluxogramas:list' %}"><button class="btn btn-primary">Editar</button></a>
+        <a href="{% url 'fluxogramas:edit' fluxograma.id %}"><button class="btn btn-primary">Editar</button></a>
         <a href="{% url 'fluxogramas:list' %}"><button class="btn btn-danger">Voltar</button></a>
     </section>
 {% endblock %}
